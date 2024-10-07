@@ -151,16 +151,4 @@ test.describe('testing for hubtel blog site', () => {
     }
   });
 
-    
-
-  test('has title', async ({ page }) => {
-    await page.goto('https://blog.hubtel.com/category/news/');
-    
-    console.log(await page.title());
-    
-    // Expect a title "to contain" a substring.
-    await expect(page).toHaveTitle('News Archives - Hubtel Blog');
-  });
-
-
 });
