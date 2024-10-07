@@ -4,6 +4,7 @@ const { test, expect } = require('@playwright/test');
 // import playwrightConfig from '../playwright.config';
 
 test.describe('testing for hubtel blog site', () => {
+  
   test('01 Validate Title', async ({page}) => {
     await page.goto('https://blog.hubtel.com/category/news/');
     await expect(page).toHaveTitle('News Archives - Hubtel Blog')
@@ -97,38 +98,42 @@ test.describe('testing for hubtel blog site', () => {
     await page.getByRole('link', { name: 'Join the Team' }).click();
   
     // Wait for the search results page to load
-    await page.waitForLoadState('networkidle');
+    // await page.waitForLoadState('networkidle');
+    await test.setTimeout(90000);
     await expect(page).toHaveTitle('Hubtel Careers')
   
     await page.getByRole('link', { name: 'Our Stories' }).click();
   
     // Wait for the search results page to load
-    await page.waitForLoadState('networkidle');
+    // await page.waitForLoadState('networkidle');
     await expect(page).toHaveTitle('The Official Hubtel Blog')
   
     await page.getByRole('link', { name: 'Legal' }).click();
   
     // Wait for the search results page to load
-    await page.waitForLoadState('networkidle');
+    // await page.waitForLoadState('networkidle');
     await expect(page).toHaveTitle('General Terms of Service - Hubtel')
   
     await page.getByRole('link', { name: 'Premium Subscription Billing' }).click();
   
     // Wait for the search results page to load
-    await page.waitForLoadState('networkidle');
+    // await page.waitForLoadState('networkidle');
     await expect(page).toHaveTitle('Premium Billing - Hubtel')
+
   
-    await page.getByRole('link', { name: 'Connect to APIs' }).click();
-    
-    // Wait for the search results page to load
-    await page.waitForLoadState('domcontentloaded');
-    await page.waitForLoadState('networkidle');
-    await expect(page).toHaveTitle('Developer Portal')  // The Developer Portal instance opens a new page which will make this script fail
-    
+    // Listen for the popup event when the new page is opened
+    const [newPage] = await Promise.all([
+      page.waitForEvent('popup'), // Wait for the popup event (new tab)
+      page.getByRole('link', { name: 'Connect to APIs' }).click(), // Click link to open the new tab
+    ]);
+  
+    // Assert that the new page has the correct title
+    await expect(newPage).toHaveTitle('Developer Portal');
+  
   });
 
 
-
+  
   test('06 litrate through the news on clicking "Next"', async ({ page }) => {
     await page.goto('https://blog.hubtel.com/category/news/#');
   
