@@ -3,7 +3,7 @@ const { test, expect } = require('@playwright/test');
 // import { test, expect } from '@playwright/test';
 // import playwrightConfig from '../playwright.config';
 
-test.describe('testing for hubtel blog site', () => {
+test.describe('testing for hubtel news category', () => {
   
   test('01 Validate Title', async ({page}) => {
     await page.goto('https://blog.hubtel.com/category/news/');
