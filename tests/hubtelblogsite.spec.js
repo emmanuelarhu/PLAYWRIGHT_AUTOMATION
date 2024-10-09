@@ -135,8 +135,4 @@ test.describe('testing for hubtel blog site', () => {
     await expect(newPage).toHaveTitle('Developer Portal');
   
   });
-
-
-  
-
-});
+});  
