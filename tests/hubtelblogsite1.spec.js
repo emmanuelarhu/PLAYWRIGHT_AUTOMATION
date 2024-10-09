@@ -49,6 +49,7 @@ test.describe('Hubtel Blog Tests', () => {
 
   });
 
+
   test('Category Sections Visibility', async ({ page }) => {
     // Test category headers and descriptions
     const categories = [
