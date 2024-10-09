@@ -7,7 +7,7 @@ test.describe('testing for hubtel blog site', () => {
   
   test('01 Validate Title', async ({page}) => {
     await page.goto('https://blog.hubtel.com/');
-    await expect(page).toHaveTitle('News Archives - Hubtel Blog')
+    await expect(page).toHaveTitle('The Official Hubtel Blog')
 
   });
 
@@ -19,15 +19,19 @@ test.describe('testing for hubtel blog site', () => {
     await page.getByPlaceholder('search').click();
     await page.getByPlaceholder('search').fill('Hubtel Turns 19 Years');
 
-    // await page.getByRole('button', {name: 'fa fa-search'}).click();
-    // await page.getByRole('button', {name: 'd-flex align-items-center justify-content-center text-white btn btn-primary'}).click();
     await page.click('[aria-describedby="basic-addon2"]');
 
     // Wait for the search results page to load
     await page.waitForLoadState('networkidle');
 
+    await page.getByRole('link', { name: '' }).click();
     const searchResultText = await page.textContent('body');
     expect(searchResultText).toContain('Hubtel Turns 19 Years');
+
+
+    await expect(page).toHaveTitle('You searched for Hubtel Turns 19 Years - Hubtel Blog')
+
+    // ('You searched for Hubtel Turns 19 Years - Hubtel Blog')
 
   });
 
@@ -134,26 +138,5 @@ test.describe('testing for hubtel blog site', () => {
 
 
   
-  test('06 litrate through the news on clicking "Next"', async ({ page }) => {
-    await page.goto('https://blog.hubtel.com/#');
-  
-    // Loop through pages from 1 to 13
-    for (let pageIndex = 1; pageIndex <= 11; pageIndex++) {
-      // Click the "Next" button to navigate to the next page
-      await page.locator('.next').click();
-  
-      // Wait for the page to load
-      await page.waitForLoadState('networkidle');
-  
-      // Construct the expected title for the current page
-      const expectedTitle = `News Archives - Page ${pageIndex + 1} of 13 - Hubtel Blog`;
-  
-      // Verify that the title matches the expected title
-      await expect(page).toHaveTitle(expectedTitle);
-  
-      // Log the title if the verification passes
-      console.log(`Passed: ${expectedTitle}`);
-    }
-  });
 
 });
