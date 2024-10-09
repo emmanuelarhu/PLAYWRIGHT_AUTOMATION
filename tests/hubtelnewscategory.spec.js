@@ -1,13 +1,13 @@
 // @ts-check
 const { test, expect } = require('@playwright/test');
-// import { test, expect } from '@playwright/test';
+// import { test, expect.soft } from '@playwright/test';
 // import playwrightConfig from '../playwright.config';
 
 test.describe('testing for hubtel news category', () => {
   
   test('01 Validate Title', async ({page}) => {
     await page.goto('https://blog.hubtel.com/category/news/');
-    await expect(page).toHaveTitle('News Archives - Hubtel Blog')
+    await expect.soft(page).toHaveTitle('News Archives - Hubtel Blog')
 
   });
 
@@ -27,7 +27,7 @@ test.describe('testing for hubtel news category', () => {
     await page.waitForLoadState('networkidle');
 
     const searchResultText = await page.textContent('body');
-    expect(searchResultText).toContain('Hubtel Turns 19 Years');
+    expect.soft(searchResultText).toContain('Hubtel Turns 19 Years');
 
   });
 
@@ -38,24 +38,24 @@ test.describe('testing for hubtel news category', () => {
   
     // Test Instagram link
     const instagramLink = await page.locator('a[href="https://www.instagram.com/hubtel/?hl=en"]');
-    await expect(instagramLink).toBeVisible();
+    await expect.soft(instagramLink).toBeVisible();
   
-    await expect(instagramLink).toHaveAttribute('href', 'https://www.instagram.com/hubtel/?hl=en');
+    await expect.soft(instagramLink).toHaveAttribute('href', 'https://www.instagram.com/hubtel/?hl=en');
   
     // Test Twitter (X) link
     const xlink = await page.locator('a[href="https://twitter.com/hubtel"]'); // update with the correct X (Twitter) link
-    await expect(xlink).toBeVisible();
-    await expect(xlink).toHaveAttribute('href', 'https://twitter.com/hubtel'); // maintain if intentional, update if oversight 
+    await expect.soft(xlink).toBeVisible();
+    await expect.soft(xlink).toHaveAttribute('href', 'https://twitter.com/hubtel'); // maintain if intentional, update if oversight 
   
     // Test LinkedIn link
     const linkedinLink = await page.locator('a[href="https://www.linkedin.com/company/hubtel/mycompany/"]'); // replace with correct LinkedIn link
-    await expect(linkedinLink).toBeVisible();
-    await expect(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/company/hubtel/mycompany/');
+    await expect.soft(linkedinLink).toBeVisible();
+    await expect.soft(linkedinLink).toHaveAttribute('href', 'https://www.linkedin.com/company/hubtel/mycompany/');
   
     // Test Facebook link
     const facebookLink = await page.locator('a[href="https://web.facebook.com/hubtelghana/"]'); // replace with correct Facebook link
-    await expect(facebookLink).toBeVisible();
-    await expect(facebookLink).toHaveAttribute('href', 'https://web.facebook.com/hubtelghana/');
+    await expect.soft(facebookLink).toBeVisible();
+    await expect.soft(facebookLink).toHaveAttribute('href', 'https://web.facebook.com/hubtelghana/');
   });
 
 
@@ -87,38 +87,38 @@ test.describe('testing for hubtel news category', () => {
     await page.getByRole('link', { name: `For our communities;` }).click();
 
     await page.waitForLoadState('networkidle');
-    await expect(page).toHaveTitle('Pledge - Hubtel') 
+    await expect.soft(page).toHaveTitle('Pledge - Hubtel') 
   
     await page.getByRole('link', { name: 'Leadership & Team' }).click();
   
     // Wait for the search results page to load
     await page.waitForLoadState('networkidle');
-    await expect(page).toHaveTitle('The Team - Hubtel')
+    await expect.soft(page).toHaveTitle('The Team - Hubtel')
   
     await page.getByRole('link', { name: 'Join the Team' }).click();
   
     // Wait for the search results page to load
     // await page.waitForLoadState('networkidle');
     await test.setTimeout(90000);
-    await expect(page).toHaveTitle('Hubtel Careers')
+    await expect.soft(page).toHaveTitle('Hubtel Careers')
   
     await page.getByRole('link', { name: 'Our Stories' }).click();
   
     // Wait for the search results page to load
     // await page.waitForLoadState('networkidle');
-    await expect(page).toHaveTitle('The Official Hubtel Blog')
+    await expect.soft(page).toHaveTitle('The Official Hubtel Blog')
   
     await page.getByRole('link', { name: 'Legal' }).click();
   
     // Wait for the search results page to load
     // await page.waitForLoadState('networkidle');
-    await expect(page).toHaveTitle('General Terms of Service - Hubtel')
+    await expect.soft(page).toHaveTitle('General Terms of Service - Hubtel')
   
     await page.getByRole('link', { name: 'Premium Subscription Billing' }).click();
   
     // Wait for the search results page to load
     // await page.waitForLoadState('networkidle');
-    await expect(page).toHaveTitle('Premium Billing - Hubtel')
+    await expect.soft(page).toHaveTitle('Premium Billing - Hubtel')
 
   
     // Listen for the popup event when the new page is opened
@@ -128,7 +128,7 @@ test.describe('testing for hubtel news category', () => {
     ]);
   
     // Assert that the new page has the correct title
-    await expect(newPage).toHaveTitle('Developer Portal');
+    await expect.soft(newPage).toHaveTitle('Developer Portal');
   
   });
 
@@ -149,7 +149,7 @@ test.describe('testing for hubtel news category', () => {
       const expectedTitle = `News Archives - Page ${pageIndex + 1} of 13 - Hubtel Blog`;
   
       // Verify that the title matches the expected title
-      await expect(page).toHaveTitle(expectedTitle);
+      await expect.soft(page).toHaveTitle(expectedTitle);
   
       // Log the title if the verification passes
       console.log(`Passed: ${expectedTitle}`);
