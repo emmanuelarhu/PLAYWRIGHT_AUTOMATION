@@ -16,35 +16,35 @@ test.describe('Hubtel Blog Tests', () => {
       { role: 'link', name: 'Inside Hubtel' }
     ];
     
-    await expect(page.getByRole('link', { name: 'Press Releases', exact: true })).toBeVisible();
+    await expect.soft(page.getByRole('link', { name: 'Press Releases', exact: true })).toBeVisible();
       
     for (const link of navLinks) {
-      await expect(page.getByRole(link.role, { name: link.name })).toBeVisible();
+      await expect.soft(page.getByRole(link.role, { name: link.name })).toBeVisible();
     }
 
     // Test header elements
-    await expect(page.getByText('Blog News Press Releases')).toBeVisible();
-    await expect(page.locator('#navbarDropdownMenuLink')).toBeVisible();
-    // await expect(page.getByLabel('', { exact: true }).locator('div').first()).toBeVisible();
+    await expect.soft(page.getByText('Blog News Press Releases')).toBeVisible();
+    await expect.soft(page.locator('#navbarDropdownMenuLink')).toBeVisible();
+    // await expect.soft(page.getByLabel('', { exact: true }).locator('div').first()).toBeVisible();
   });
 
 
   test('Featured Content Visibility', async ({ page }) => {
     // Test featured articles
-    await expect(page.getByRole('link', { 
+    await expect.soft(page.getByRole('link', { 
       name: 'Correction of False Claims About ECG Commercial Agreement', exact: true })).toBeVisible();
   });
 
   test('Blog Cards Visibility', async ({ page }) => {
     // Test blog card containers
 
-    await expect(page.getByRole ('link', {name: 'Correction of False Claims About ECG Commercial Agreement', exact: true})).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Hubtel Opens Ghana’s First'})).toBeVisible();
-    await expect(page.getByRole('link', { name: 'Hubtel Ranked Ghana\'s Fastest'})).toBeVisible();
-    await expect(page.locator('p').filter({ hasText: 'Hubtel Announces Completion'})).toBeVisible();
+    await expect.soft(page.getByRole ('link', {name: 'Correction of False Claims About ECG Commercial Agreement', exact: true})).toBeVisible();
+    await expect.soft(page.getByRole('link', { name: 'Hubtel Opens Ghana’s First'})).toBeVisible();
+    await expect.soft(page.getByRole('link', { name: 'Hubtel Ranked Ghana\'s Fastest'})).toBeVisible();
+    await expect.soft(page.locator('p').filter({ hasText: 'Hubtel Announces Completion'})).toBeVisible();
     
 
-    await expect(page.locator('.blog-card-image-container > .text-decoration-none').first()).toBeVisible();
+    await expect.soft(page.locator('.blog-card-image-container > .text-decoration-none').first()).toBeVisible();
     await page.getByRole('link', { name: 'Correction of False Claims About ECG Commercial Agreement', exact: true })
 
   });
@@ -61,13 +61,13 @@ test.describe('Hubtel Blog Tests', () => {
     ];
 
     for (const category of categories) {
-      await expect(page.getByRole('heading', { name: category.heading })).toBeVisible();
-      await expect(page.getByText(category.description)).toBeVisible();
+      await expect.soft(page.getByRole('heading', { name: category.heading })).toBeVisible();
+      await expect.soft(page.getByText(category.description)).toBeVisible();
     }
   });
 
   test('Footer Content', async ({ page }) => {
-    await expect(page.getByText('©2005 - 2024 Hubtel Our')).toBeVisible();
+    await expect.soft(page.getByText('©2005 - 2024 Hubtel Our')).toBeVisible();
   });
 });  
 
